@@ -1,5 +1,5 @@
 function p = Param(varargin)
-% ST.Param
+% Grit.ST.Param
 %
 % Description: get a stroop parameter
 global SIZE_MULTIPLIER;

@@ -1,5 +1,5 @@
 function effect = StroopEffect(param, result)
-% ST.StroopEffect
+% Grit.ST.StroopEffect
 %
 % Calculates the extent of the Stroop effect after a Stroop Task run.
 % (Stroop effect: rt(incongruent) > rt(congruent) on correct trials)

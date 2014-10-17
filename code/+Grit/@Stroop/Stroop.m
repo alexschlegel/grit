@@ -29,11 +29,11 @@ classdef Stroop < PTB.Object
             
             opt.name = 'stroop';
             opt.input_scheme = 'lrud';            
-            opt.text_size = ST.Param('text', 'instructSize');
-            opt.text_color = ST.Param('text', 'color');
+            opt.text_size = Grit.ST.Param('text', 'instructSize');
+            opt.text_color = Grit.ST.Param('text', 'color');
             
             % window
-            opt.background = ST.Param('color','back');
+            opt.background = Grit.ST.Param('color','back');
             
             % pass options to the experiment
             cOpt = Opt2Cell(opt);

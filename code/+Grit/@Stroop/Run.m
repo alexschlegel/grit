@@ -1,5 +1,5 @@
 function Run(st, debug)
-% Stroop.Run
+% Grit.Stroop.Run
 %
 % Description: do the next Stroop run
 %
@@ -10,10 +10,10 @@ function Run(st, debug)
 % Syntax: st.Run
 % 
 
-sButton = ST.Param('response');
+sButton = Grit.ST.Param('response');
 cColor = fieldnames(sButton);
 cKey = struct2cell(sButton);
-cGPButton = ST.Param('gpButton');
+cGPButton = Grit.ST.Param('gpButton');
 
 % key mappings
 cellfun(@(name,but) st.exp.Input.Set(name,but), cColor, cKey);
@@ -35,7 +35,7 @@ if size(practiceMatrixBase, 2) ~= nWords^2
 end
 
 % Total number of trials = conditions * trialsPerCondition
-trialsPerCondition = ST.Param('trialspercond');
+trialsPerCondition = Grit.ST.Param('trialspercond');
 condMatrix = repmat(condMatrixBase, 1, trialsPerCondition);
 [~, numTrials] = size(condMatrix);
 
@@ -45,7 +45,7 @@ shuffler = Shuffle(1:numTrials);
 condMatrixShuffled = condMatrix(:, shuffler);
 
 % Get practice trials
-numPractice = ST.Param('npracticetrials');
+numPractice = Grit.ST.Param('npracticetrials');
 rng('shuffle');
 shuffler = Shuffle(1:nWords^2);
 shuffler = shuffler(1:numPractice);
@@ -74,7 +74,7 @@ st.exp.Show.Instructions('You will now have a short practice round.','next','beg
 % Pause scheduler
 st.exp.Scheduler.Pause;
 
-wordSize = ST.Param('text','wordSize');
+wordSize = Grit.ST.Param('text','wordSize');
 
 % Run the practice
 for pTrial = 1:numPractice
@@ -89,7 +89,7 @@ for pTrial = 1:numPractice
     end
     st.exp.Show.Blank('fixation',false);  % blank the screen
     st.exp.Window.Flip;
-    WaitSecs(ST.Param('restperiod'));
+    WaitSecs(Grit.ST.Param('restperiod'));
 end
 
 st.exp.Show.Instructions('End of practice round.','next', 'begin the experiment');
@@ -119,14 +119,14 @@ for trial = 1:numTrials
     % Save
     st.exp.Info.Set('stroop', 'result', result);
     % Wait before the next stimulus
-    WaitSecs(ST.Param('restperiod'));
+    WaitSecs(Grit.ST.Param('restperiod'));
 end
 fClose = @()deal(st.exp.Input.DownOnce('close_window'),false,PTB.Now);
 st.exp.Show.Instructions('Finished! Please alert the experimenter.', ...
      'prompt', ' ', 'fresponse', fClose);
 st.exp.Scheduler.Resume;
 % Calculate the stroop effect
-result.effect = ST.StroopEffect(st.exp.Info.Get('stroop','param'), result);
+result.effect = Grit.ST.StroopEffect(st.exp.Info.Get('stroop','param'), result);
 st.exp.Info.Set('stroop','result',result);
 st.exp.End;
 end
